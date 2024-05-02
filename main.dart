@@ -13,7 +13,6 @@ void main() {
   var calcularPuntaje2 = Blackjack.calcularPuntaje(masoCrupier);
 
   print('Cartas repartidas al usuario: ');
-  print(repartirCartasUsuario);
   print('El puntaje de la mano es: $calcularPuntaje ');
 
   print('Cartas repartidas al crupier: ');
