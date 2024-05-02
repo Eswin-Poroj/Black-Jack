@@ -2,10 +2,10 @@ import 'dart:math';
 import 'dart:io';
 import 'mazo-de-cartas.dart';
 
-abstract class Cruppier {}
+abstract class Usuario {}
 
-class RepartirCartas extends Cruppier {
-  dynamic repartirCartas() {
+class RepartirCartasUsuario extends Usuario {
+  dynamic repartirCartasUsuario() {
     List<Map<String, dynamic>> mano = [];
     Random random = Random();
     for (var _ in MazodeCartasBlackJack.cartas) {
@@ -19,7 +19,7 @@ class RepartirCartas extends Cruppier {
   }
 }
 
-class Blackjack extends Cruppier {
+class BlackjackUsuario extends Usuario {
   static dynamic calcularPuntaje(List<Map<String, dynamic>> mano) {
     num puntaje = 0;
     num puntaje2 = 0;
@@ -39,16 +39,6 @@ class Blackjack extends Cruppier {
           } else {
             puntaje += value;
           }
-
-          /*if (puntaje > 21) {
-            print('Haz perdidio por superar 21 puntos');
-          } else if (puntaje == 21) {
-            print('BlackJack \n Haz ganado con 21 puntos');
-          } else if (puntaje < 21 && puntaje > 16) {
-            print('Haz ganado con $puntaje puntos');
-          } else if (puntaje < 16) {
-            print('Tienes $puntaje puntos, puedes pedir otra carta');
-          }*/
         }
       });
     }

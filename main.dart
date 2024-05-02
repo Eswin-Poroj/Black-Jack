@@ -1,16 +1,27 @@
-import 'dart:io';
-
-import 'clases/crupier.dart';
+import 'clases/jugadorUsuario.dart';
+import 'clases/jugadorCrupier.dart';
 
 void main() {
-  List<Map<String, dynamic>> repartirCartas = RepartirCartas().repartirCartas();
-  print(repartirCartas);
-  var calcularPuntaje = Blackjack.calcularPuntaje(repartirCartas);
+  List<Map<String, dynamic>> repartirCartasUsuario =
+      RepartirCartasUsuario().repartirCartasUsuario();
 
+  List<Map<String, dynamic>> masoCrupier =
+      RepartirCartasCrupier().repartirCartasCrupier();
+
+  var calcularPuntaje = BlackjackUsuario.calcularPuntaje(repartirCartasUsuario);
+
+  var calcularPuntaje2 = Blackjack.calcularPuntaje(masoCrupier);
+
+  print('Cartas repartidas al usuario: ');
+  print(repartirCartasUsuario);
   print('El puntaje de la mano es: $calcularPuntaje ');
+
+  print('Cartas repartidas al crupier: ');
+  print(masoCrupier);
+  print('El puntaje de la mano es: $calcularPuntaje2 ');
 }
 
-class Blackjack {
+/*class Blackjack {
   static dynamic calcularPuntaje(List<Map<String, dynamic>> mano) {
     num puntaje = 0;
     num puntaje2 = 0;
@@ -69,4 +80,4 @@ class Blackjack {
     }
     return puntaje;
   }
-}
+}*/
