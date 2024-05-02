@@ -4,12 +4,6 @@ import 'clases/jugadorUsuario.dart';
 import 'clases/jugadorCrupier.dart';
 
 void main() {
-  List<Map<String, dynamic>> repartirCartasUsuario =
-      RepartirCartasUsuario().repartirCartasUsuario();
-
-  List<Map<String, dynamic>> masoCrupier =
-      RepartirCartasCrupier().repartirCartasCrupier();
-
   String? opcion;
   num calcularPuntaje;
   num calcularPuntaje2;
@@ -21,11 +15,18 @@ void main() {
     opcion = stdin.readLineSync();
     switch (opcion) {
       case '1':
-        calcularPuntaje =
-            BlackjackUsuario.calcularPuntaje(repartirCartasUsuario);
-        calcularPuntaje2 = Blackjack.calcularPuntaje(masoCrupier);
-        calificador(calcularPuntaje, calcularPuntaje2);
-        print('$calcularPuntaje + $calcularPuntaje2');
+        {
+          List<Map<String, dynamic>> repartirCartasUsuario =
+              RepartirCartasUsuario().repartirCartasUsuario();
+
+          List<Map<String, dynamic>> masoCrupier =
+              RepartirCartasCrupier().repartirCartasCrupier();
+          calcularPuntaje =
+              BlackjackUsuario.calcularPuntaje(repartirCartasUsuario);
+          calcularPuntaje2 = Blackjack.calcularPuntaje(masoCrupier);
+          calificador(calcularPuntaje, calcularPuntaje2);
+          print('$calcularPuntaje + $calcularPuntaje2');
+        }
         break;
       case '2':
         print('Gracias por jugar');
