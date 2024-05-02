@@ -64,7 +64,21 @@ class MazodeCartasBlackJack extends MazodeCartas {
     {'EspadasK': 10},
   ];
 
+  MazodeCartasBlackJack(List<Map<String, dynamic>> cartas);
+
 /*
+  List<Map<String, dynamic>> repartirCartas() {
+    List<Map<String, dynamic>> mano = [];
+    cartas.shuffle();
+    Random random = Random();
+
+    for (int i = 0; i < 2; i++) {
+      int index = random.nextInt(cartas.length);
+      mano.add(cartas[index]);
+    }
+    return mano;
+  }
+
   List<CartaEspanola> cartas = ['oros', 'copas', 'espadas', 'bastos'];
   MazodeCartasEspanolas() {
     for (var palo in ['oros', 'copas', 'espadas', 'bastos']) {
