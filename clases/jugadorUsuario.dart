@@ -34,7 +34,6 @@ class BlackjackUsuario extends Usuario {
             puntaje;
             puntaje2 = sumaPuntajeAs(puntaje);
             puntaje = puntaje2;
-
             tieneAs = true;
           } else {
             puntaje += value;
@@ -42,23 +41,30 @@ class BlackjackUsuario extends Usuario {
         }
       });
     }
-    averiguarSiPedimosCarta(puntaje, mano);
-    return puntaje;
+    dynamic nuevoPuntaje = averiguarSiPedimosCarta(puntaje, mano);
+    return nuevoPuntaje;
   }
 
   static dynamic averiguarSiPedimosCarta(
       num puntaje, List<Map<String, dynamic>> mano) {
+    dynamic totalPuntos;
     if (puntaje > 21) {
       print('Tienes $puntaje puntos.');
     } else if (puntaje == 21) {
       print('BlackJack \n Haz ganado con 21 puntos');
     } else if (puntaje < 21 && puntaje > 16) {
       print('Tienes $puntaje puntos, quieres pedir otra carta?');
+      List<Map<String, dynamic>> manoNueva = pedirCarta(mano, puntaje);
+      print(manoNueva);
+      totalPuntos = sumarCartasTotales(manoNueva);
     } else if (puntaje < 16) {
-      print(mano);
-      pedirCarta(mano, puntaje);
+      List<Map<String, dynamic>> manoNueva = pedirCarta(mano, puntaje);
+      print(manoNueva);
+      totalPuntos = sumarCartasTotales(manoNueva);
+    } else {
+      print('Opción no válida');
     }
-    return puntaje;
+    return totalPuntos;
   }
 
   static dynamic sumaPuntajeAs(num puntaje) {
@@ -91,9 +97,7 @@ class BlackjackUsuario extends Usuario {
       mano.clear();
       mano.addAll(nuevaCarta);
 
-      dynamic totalPuntos = sumarCartasTotales(mano);
       print(mano);
-      print('El total de puntos es: $totalPuntos');
     } else if (pedirCarta == '2') {
       print('Te has plantado con $puntaje puntos');
     } else {
@@ -116,10 +120,11 @@ class BlackjackUsuario extends Usuario {
     for (var datos in mano) {
       datos.forEach((key, value) {
         if (key == 'valor') {
-          puntaje += value; // Esto es lo que está causando el error
+          puntaje += value;
         }
       });
     }
+    print('Tienes $puntaje puntos');
     return puntaje;
   }
 

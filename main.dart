@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'clases/jugadorUsuario.dart';
 import 'clases/jugadorCrupier.dart';
 
@@ -8,75 +10,38 @@ void main() {
   List<Map<String, dynamic>> masoCrupier =
       RepartirCartasCrupier().repartirCartasCrupier();
 
-  var calcularPuntaje = BlackjackUsuario.calcularPuntaje(repartirCartasUsuario);
+  String? opcion;
+  num calcularPuntaje;
+  num calcularPuntaje2;
 
-  var calcularPuntaje2 = Blackjack.calcularPuntaje(masoCrupier);
-
-  print('Cartas repartidas al usuario: ');
-  print('El puntaje de la mano es: $calcularPuntaje ');
-
-  print('Cartas repartidas al crupier: ');
-  print(masoCrupier);
-  print('El puntaje de la mano es: $calcularPuntaje2 ');
+  do {
+    stdout.writeln('1. Nuevo juego');
+    stdout.writeln('2. Salir');
+    stdout.writeln('Elija una opción: ');
+    opcion = stdin.readLineSync();
+    switch (opcion) {
+      case '1':
+        calcularPuntaje =
+            BlackjackUsuario.calcularPuntaje(repartirCartasUsuario);
+        calcularPuntaje2 = Blackjack.calcularPuntaje(masoCrupier);
+        calificador(calcularPuntaje, calcularPuntaje2);
+        print('$calcularPuntaje + $calcularPuntaje2');
+        break;
+      case '2':
+        print('Gracias por jugar');
+        break;
+      default:
+        print('Opción no válida');
+    }
+  } while (opcion != '2');
 }
 
-/*class Blackjack {
-  static dynamic calcularPuntaje(List<Map<String, dynamic>> mano) {
-    num puntaje = 0;
-    num puntaje2 = 0;
-    bool tieneAs = false;
-    for (var cartas in mano) {
-      cartas.forEach((key, value) {
-        if (key == 'valor') {
-          if (value is List &&
-              value.contains(1) &&
-              value.contains(11) &&
-              !tieneAs) {
-            puntaje;
-            puntaje2 = sumaPuntajeAs(puntaje);
-            puntaje = puntaje2;
-
-            tieneAs = true;
-          } else {
-            puntaje += value;
-          }
-
-          /*if (puntaje > 21) {
-            print('Haz perdidio por superar 21 puntos');
-          } else if (puntaje == 21) {
-            print('BlackJack \n Haz ganado con 21 puntos');
-          } else if (puntaje < 21 && puntaje > 16) {
-            print('Haz ganado con $puntaje puntos');
-          } else if (puntaje < 16) {
-            print('Tienes $puntaje puntos, puedes pedir otra carta');
-          }*/
-        }
-      });
-    }
-    if (puntaje > 21) {
-      print('Tienes $puntaje puntos.');
-    } else if (puntaje == 21) {
-      print('BlackJack \n Haz ganado con 21 puntos');
-    } else if (puntaje < 21 && puntaje > 16) {
-      print('Tienes $puntaje puntos, quieres pedir otra carta?');
-    } else if (puntaje < 16) {
-      print('Tienes $puntaje puntos, pede otra carta');
-    }
-    return puntaje;
+dynamic calificador(num puntajeUsuario, num puntajeCrupier) {
+  if (puntajeUsuario > puntajeCrupier) {
+    print('Haz ganado con $puntajeUsuario puntos');
+  } else if (puntajeUsuario < puntajeCrupier) {
+    print('Haz perdido con $puntajeUsuario puntos');
+  } else {
+    print('Empate con $puntajeUsuario puntos');
   }
-
-  static dynamic sumaPuntajeAs(num puntaje) {
-    stdout.writeln('Tienes un As, puedes elegir entre: \n 1. 1 \n 2. 11');
-    stdout.writeln(
-        'Tienes un As y tienes $puntaje puntos, Cuanto quieres que valga el As');
-    String valorAs = stdin.readLineSync()!;
-    if (valorAs == '1') {
-      puntaje += 1;
-    } else if (valorAs == '2') {
-      puntaje += 11;
-    } else {
-      print('Opción no válida');
-    }
-    return puntaje;
-  }
-}*/
+}

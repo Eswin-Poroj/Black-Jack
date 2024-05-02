@@ -43,16 +43,18 @@ class Blackjack extends Crupier {
         }
       });
     }
-    averiguarSiPedimosCarta(puntaje, mano);
-    return puntaje;
+    dynamic nuevoPuntaje = averiguarSiPedimosCarta(puntaje, mano);
+    return nuevoPuntaje;
   }
 
   static dynamic averiguarSiPedimosCarta(
       num puntaje, List<Map<String, dynamic>> mano) {
+    dynamic totalPuntos;
     if (puntaje < 16) {
-      pedirCarta(mano, puntaje);
+      List<Map<String, dynamic>> manoNueva = pedirCarta(mano, puntaje);
+      totalPuntos = sumarCartasTotales(manoNueva);
     }
-    return {mano, puntaje};
+    return totalPuntos;
   }
 
   static dynamic pedirCarta(List<Map<String, dynamic>> mano, num puntaje) {
@@ -73,7 +75,7 @@ class Blackjack extends Crupier {
       print('Opción no válida');
     }
 
-    return {mano, puntaje};
+    return mano;
   }
 
   static dynamic pedirCarta2(List<Map<String, dynamic>> mano) {
