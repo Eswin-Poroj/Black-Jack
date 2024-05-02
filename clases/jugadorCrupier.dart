@@ -43,6 +43,56 @@ class Blackjack extends Crupier {
         }
       });
     }
+    averiguarSiPedimosCarta(puntaje, mano);
+    return puntaje;
+  }
+
+  static dynamic averiguarSiPedimosCarta(
+      num puntaje, List<Map<String, dynamic>> mano) {
+    if (puntaje < 16) {
+      pedirCarta(mano, puntaje);
+    }
+    return {mano, puntaje};
+  }
+
+  static dynamic pedirCarta(List<Map<String, dynamic>> mano, num puntaje) {
+    if (mano.length >= 3) {
+      return {mano, puntaje};
+    }
+
+    if (puntaje < 17) {
+      List<Map<String, dynamic>> nuevaCarta = pedirCarta2(List.from(mano));
+      mano.clear();
+      mano.addAll(nuevaCarta);
+
+      dynamic totalPuntos = sumarCartasTotales(mano);
+      puntaje = totalPuntos;
+    } else if (puntaje > 16 && puntaje < 21) {
+      print('El Crupier se ha plantado con $puntaje puntos');
+    } else {
+      print('Opción no válida');
+    }
+
+    return {mano, puntaje};
+  }
+
+  static dynamic pedirCarta2(List<Map<String, dynamic>> mano) {
+    Random random = Random();
+    MazodeCartasBlackJack.cartas.shuffle();
+    int numCarta = random.nextInt(MazodeCartasBlackJack.cartas.length);
+    mano.add(MazodeCartasBlackJack.cartas[numCarta]);
+    return mano;
+  }
+
+  static dynamic sumarCartasTotales(List<Map<String, dynamic>> mano) {
+    dynamic puntaje = 0;
+    for (var datos in mano) {
+      datos.forEach((key, value) {
+        if (key == 'valor') {
+          puntaje += value;
+        }
+      });
+    }
     return puntaje;
   }
 }
