@@ -100,6 +100,7 @@ class BlackjackUsuario extends Usuario {
       print(mano);
     } else if (pedirCarta == '2') {
       print('Te has plantado con $puntaje puntos');
+      return mano;
     } else {
       print('Opción no válida');
     }

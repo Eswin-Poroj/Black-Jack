@@ -71,6 +71,7 @@ class Blackjack extends Crupier {
       puntaje = totalPuntos;
     } else if (puntaje > 16 && puntaje < 21) {
       print('El Crupier se ha plantado con $puntaje puntos');
+      return mano;
     } else {
       print('Opción no válida');
     }
